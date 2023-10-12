@@ -41,7 +41,11 @@ fn main() {
     dbg!(new_num);
 
     // Number Literals(from rust Book)
-    
+
+    // String litrals 
+    let text:&str = r#"{"ust is good}"#;
+    dbg!(text);
+
 
 }
 
