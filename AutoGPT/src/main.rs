@@ -46,6 +46,25 @@ fn main() {
     let text:&str = r#"{"ust is good}"#;
     dbg!(text);
 
+    // Working with low level Binary
+    let a:u8 = 0b_1010_1010;
+    let b:u8 = 0b_0101_0101;
+    println!("value of a is {:08b}", a);
+
+    // logic gates ( &,|, ^, !)
+    // shift operators << >>
+
+    // little endian and big endian
+    let n: u16 = 0x1234;
+    println!("n is : {:?}", n);
+
+    let big_endian: [u8; 2] = n.to_be_bytes();
+    let little_endian: [u8; 2] = n.to_le_bytes();
+
+    println!("big endian {:02X}{:02X}", big_endian[0], big_endian[1]);
+    println!("little endian {:02X}{:02X}", little_endian[0], little_endian[1]);
+
+
 
 }
 
