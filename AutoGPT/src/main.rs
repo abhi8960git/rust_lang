@@ -39,5 +39,9 @@ fn main() {
     let add_num = |x:i32| x + num;
     let new_num:i32 = add_num(7);
     dbg!(new_num);
+
+    // Number Literals(from rust Book)
+    
+
 }
 
