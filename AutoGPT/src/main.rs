@@ -1,3 +1,5 @@
+mod m1_enums;
+
 const OUR_COURSE: &str = "RUST with AUTOGPT";
 
 fn main() {
@@ -63,7 +65,9 @@ fn main() {
 
     println!("big endian {:02X}{:02X}", big_endian[0], big_endian[1]);
     println!("little endian {:02X}{:02X}", little_endian[0], little_endian[1]);
+ 
 
+    
 
 
 }
