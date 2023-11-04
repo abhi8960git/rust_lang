@@ -1,54 +1,97 @@
-#[derive(Debug)]
+use core::num;
 
-enum CarColor{
+#[derive(Debug)]
+// tell car color should be able to use debug
+enum carColor {
     Red,
     Green,
     Blue,
-    Silver
+    Silver,
 }
 
+fn handle_car_color_blue() -> carColor {
+    let my_color: carColor = carColor::Blue;
+    my_color
+}
 
+// ---------------------------------------------------------------
+#[derive(Debug)]
 
-
-
-
-// Genrics 
-enum GivenResult<T,E>{
+enum Error<T, E> {
     Ok(T),
-    Err(E)
+    Err(E),
 }
 
-fn create_car_color_blue() ->CarColor{
-    let my_car_color:CarColor=  CarColor::Blue;
-    my_car_color
-}
-
-
-fn check_under_five(num_check : u8) -> GivenResult<u8, String>{
-    if num_check < 5 {
-        GivenResult::Ok(num_check)
-    }else{
-        GivenResult::Err("Not under 5!".to_string())
+fn check_number_greater_than_five(num_check: u8) -> Error<u8, String> {
+    if num_check > 5 {
+        Error::Ok(num_check)
+    } else {
+        Error::Err("Number is not Greater than 5".to_string())
     }
 }
 
-fn check_under_five_builtin(num_check : u8) -> Result<u8, String>{
-    if num_check < 5 {
+fn check_number_greater_than_five_builtIn(num_check: u8) -> Result<u8, String> {
+    if num_check > 5 {
         Ok(num_check)
-    }else{
-       Err("Not under 5!".to_string())
+    } else {
+        Err("Number is not Greater than 5".to_string())
+    }
+}
+
+// default enums in rust some and none
+
+#[derive(Debug)]
+enum result<T> {
+    None,
+    Some(T),
+}
+
+fn check_remainder_zero(num: f32) -> result<f32> {
+    let is_remainder: f32 = num % 10.0;
+
+    if is_remainder != 0.0 {
+        result::None
+    } else {
+        result::Some(is_remainder)
+    }
+}
+
+fn check_remainder_zero_builtIn(num: f32) -> Option<f32> {
+    let is_remainder: f32 = num % 10.0;
+
+    if is_remainder != 0.0 {
+        None
+    } else {
+        Some(is_remainder)
     }
 }
 
 #[cfg(test)]
-
-mod test1{
+mod test {
     use super::*;
     #[test]
-    fn test_enums(){
-        let car_color:CarColor = create_car_color_blue();
+
+    fn test_enums() {
+        let car_color: carColor = handle_car_color_blue();
         dbg!(car_color);
-        let is_under_five_res = check_under_five(4);
-        let is_under_five_res = check_under_five_builtin(6);
+
+        let is_under_five_res: Error<u8, String> = check_number_greater_than_five(3);
+        dbg!(is_under_five_res);
+
+        let is_under_five_res: Error<u8, String> = check_number_greater_than_five(6);
+        dbg!(is_under_five_res);
+
+        let is_under_five_res:Result<u8, String> = check_number_greater_than_five_builtIn(6);
+        dbg!(is_under_five_res);
+
+        let remainder: result<f32> = check_remainder_zero(20.0);
+        dbg!(remainder);
+
+
+        let remainder: Option<f32> = check_remainder_zero_builtIn(20.0);
+        dbg!(remainder);
+
+        let remainder: result<f32> = check_remainder_zero(3.0);
+        dbg!(remainder);
     }
 }
